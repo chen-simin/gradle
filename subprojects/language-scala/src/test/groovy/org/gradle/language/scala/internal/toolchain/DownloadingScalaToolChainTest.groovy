@@ -62,9 +62,11 @@ class DownloadingScalaToolChainTest extends Specification {
         !toolProvider.isAvailable()
         TreeFormatter scalacErrorFormatter = new TreeFormatter()
         toolProvider.explain(scalacErrorFormatter)
-        scalacErrorFormatter.toString() == "Cannot provide Scala Compiler: Cannot resolve 'scala-compiler'."
+        scalacErrorFormatter.toString() == """Cannot provide Scala Compiler:
+  - Cannot resolve 'scala-compiler'."""
         def e = thrown(GradleException)
-        e.message == "Cannot provide Scala Compiler: Cannot resolve 'scala-compiler'."
+        e.message == """Cannot provide Scala Compiler:
+  - Cannot resolve 'scala-compiler'."""
 
         when:
         dependencyAvailable("scala-compiler")

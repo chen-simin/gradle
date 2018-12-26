@@ -118,7 +118,8 @@ class WindowsKitWindowsSdkLocatorTest extends Specification {
         result.explain(visitor)
 
         then:
-        visitor.toString() == "Could not locate a Windows SDK installation. None of the following locations contain a valid installation: ${dir1}"
+        visitor.toString() == """Could not locate a Windows SDK installation. None of the following locations contain a valid installation:
+  - ${dir1}"""
     }
 
     def "SDK not available when registry dir does not contain any versions that look like an SDK"() {
@@ -140,7 +141,8 @@ class WindowsKitWindowsSdkLocatorTest extends Specification {
         result.explain(visitor)
 
         then:
-        visitor.toString() == "Could not locate a Windows SDK installation. None of the following locations contain a valid installation: ${dir1}"
+        visitor.toString() == """Could not locate a Windows SDK installation. None of the following locations contain a valid installation:
+  - ${dir1}"""
     }
 
     def "does not use registry dir versions that do not look like an SDK"() {
