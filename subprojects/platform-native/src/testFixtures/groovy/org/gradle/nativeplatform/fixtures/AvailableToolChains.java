@@ -190,7 +190,7 @@ public class AvailableToolChains {
 
     static private ToolChainCandidate findMinGW() {
         // Search in the standard installation locations
-        File compilerExe = new File("C:/MinGW/bin/g++.exe");
+        File compilerExe = new File("C:/mingw64/bin/g++.exe");
         if (compilerExe.isFile()) {
             return new InstalledWindowsGcc(ToolFamily.MINGW_GCC, VersionNumber.UNKNOWN).inPath(compilerExe.getParentFile());
         }
