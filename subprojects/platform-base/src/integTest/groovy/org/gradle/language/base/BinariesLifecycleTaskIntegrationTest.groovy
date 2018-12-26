@@ -18,7 +18,6 @@ package org.gradle.language.base
 
 import org.gradle.integtests.fixtures.AbstractIntegrationSpec
 import org.gradle.internal.logging.text.DiagnosticsVisitor
-import org.hamcrest.Matchers
 
 class BinariesLifecycleTaskIntegrationTest extends AbstractIntegrationSpec {
     def setup() {

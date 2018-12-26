@@ -124,15 +124,15 @@ model {
   - static library 'another:staticLibrary': Disabled by user
   - shared library 'hello:sharedLibrary':
       - No tool chain is available to build for platform 'unknown':
-          - Tool chain 'clang1000' (Clang):
+          - ${toolChain.instanceDisplayName}:
               - Don't know how to build for platform 'unknown'.
   - static library 'hello:staticLibrary':
       - No tool chain is available to build for platform 'unknown':
-          - Tool chain 'clang1000' (Clang):
+          - ${toolChain.instanceDisplayName}:
               - Don't know how to build for platform 'unknown'.
   - executable 'main:executable':
       - No tool chain is available to build for platform 'unknown':
-          - Tool chain 'clang1000' (Clang):
+          - ${toolChain.instanceDisplayName}:
               - Don't know how to build for platform 'unknown'.""")
     }
 
