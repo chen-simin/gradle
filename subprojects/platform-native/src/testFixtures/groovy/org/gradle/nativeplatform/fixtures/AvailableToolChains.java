@@ -323,7 +323,6 @@ public class AvailableToolChains {
         public abstract void initialiseEnvironment();
 
         public abstract void resetEnvironment();
-
     }
 
     public abstract static class InstalledToolChain extends ToolChainCandidate {
@@ -461,6 +460,10 @@ public class AvailableToolChains {
             // Implement this if you need to specify individual toolchains via "org.gradle.integtest.versions"
             throw new UnsupportedOperationException();
         }
+
+        public String platformSpecificToolChainConfiguration() {
+            return "";
+        }
     }
 
     public static abstract class GccCompatibleToolChain extends InstalledToolChain {
@@ -579,12 +582,10 @@ public class AvailableToolChains {
             for (File pathEntry : getPathEntries()) {
                 config += String.format("     path file('%s')\n", pathEntry.toURI());
             }
-            config += getAdditionalBuildConfiguration();
+            config += platformSpecificToolChainConfiguration();
             config += "}\n";
             return config;
         }
-
-        abstract String getAdditionalBuildConfiguration();
 
         @Override
         public boolean meets(ToolChainRequirement requirement) {
@@ -607,7 +608,8 @@ public class AvailableToolChains {
             super(family, version);
         }
 
-        public static String platform32Configuration() {
+        @Override
+        public String platformSpecificToolChainConfiguration() {
             String config = "     eachPlatform { platformToolChain ->\n";
             config += "         if (platformToolChain.platform.architecture.isI386() || platformToolChain.platform.architecture.isArm()) {\n";
             config += "             platformToolChain.cCompiler.executable='i686-pc-cygwin-gcc.exe'\n";
@@ -619,11 +621,6 @@ public class AvailableToolChains {
             config += "     }\n";
             return config;
         }
-
-        @Override
-        String getAdditionalBuildConfiguration() {
-            return platform32Configuration();
-        }
     }
 
     public static class InstalledMingwGcc extends InstalledWindowsGcc {
@@ -631,7 +628,8 @@ public class AvailableToolChains {
             super(family, version);
         }
 
-        public static String platform32Configuration() {
+        @Override
+        public String platformSpecificToolChainConfiguration() {
             String config = "     eachPlatform { platformToolChain ->\n";
             config += "         if (platformToolChain.platform.architecture.isI386() || platformToolChain.platform.architecture.isArm()) {\n";
             config += "             platformToolChain.cCompiler.executable='i686-w64-mingw32-gcc.exe'\n";
@@ -642,11 +640,6 @@ public class AvailableToolChains {
             config += "         }\n";
             config += "     }\n";
             return config;
-        }
-
-        @Override
-        String getAdditionalBuildConfiguration() {
-            return platform32Configuration();
         }
     }
 

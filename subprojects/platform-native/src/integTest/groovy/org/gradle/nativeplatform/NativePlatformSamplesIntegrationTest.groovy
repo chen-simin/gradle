@@ -148,14 +148,8 @@ class NativePlatformSamplesIntegrationTest extends AbstractInstalledToolChainInt
         releaseX86.assertDebugFileDoesNotExist()
         releaseX86.exec().out == "Hello world!\n"
 
-        // x86_64 binaries not supported on MinGW
-        if (toolChain.id == "mingw") {
-            debugX64.assertDoesNotExist()
-            releaseX64.assertDoesNotExist()
-        } else {
-            debugX64.arch.name == "x86_64"
-            releaseX64.arch.name == "x86_64"
-        }
+        debugX64.arch.name == "x86_64"
+        releaseX64.arch.name == "x86_64"
 
         // Itanium not built
         debugIA64.assertDoesNotExist()
