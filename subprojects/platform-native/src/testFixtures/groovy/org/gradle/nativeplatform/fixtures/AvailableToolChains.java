@@ -573,11 +573,8 @@ public class AvailableToolChains {
         @Override
         public boolean meets(ToolChainRequirement requirement) {
             switch (requirement) {
-                case SUPPORTS_32:
                 case WINDOWS_GCC:
                     return true;
-                case SUPPORTS_32_AND_64:
-                    return false;
                 default:
                     return super.meets(requirement);
             }
@@ -616,18 +613,6 @@ public class AvailableToolChains {
             config += "         }\n";
             config += "     }\n";
             return config;
-        }
-
-        @Override
-        public boolean meets(ToolChainRequirement requirement) {
-            switch (requirement) {
-                case SUPPORTS_32:
-                case WINDOWS_GCC:
-                case SUPPORTS_32_AND_64:
-                    return true;
-                default:
-                    return super.meets(requirement);
-            }
         }
     }
 
