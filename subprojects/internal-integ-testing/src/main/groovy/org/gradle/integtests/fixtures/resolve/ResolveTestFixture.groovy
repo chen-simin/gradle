@@ -881,11 +881,13 @@ class GenerateGraphTask extends DefaultTask {
 
     def formatReason(ComponentSelectionReasonInternal reason) {
         def reasons = reason.descriptions.collect {
+            def message
             if (it.hasCustomDescription() && it.cause != ComponentSelectionCause.REQUESTED) {
-                "${it.cause.defaultReason}: ${it.description}".replaceAll('\n', ' ')
+                message = "${it.cause.defaultReason}: ${it.description}"
             } else {
-                it.description
+                message = it.description
             }
+            message.readLines().join(" ")
         }.join('!!')
         return reasons
     }
